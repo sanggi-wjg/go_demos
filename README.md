@@ -39,7 +39,7 @@ https://github.com/gin-gonic/gin
 https://gorm.io/
 
 ### Go EXCEL Package
-https://github.com/qax-os/excelize
+https://xuri.me/excelize/ko/base/installation.html#NewFile
 
 ### Go Log Package
 https://github.com/sirupsen/logrus
@@ -47,12 +47,3 @@ https://github.com/sirupsen/logrus
 ### Go prometheus
 https://prometheus.io/docs/guides/go-application/
 https://github.com/prometheus/client_golang
-
-```shell_script
-go get -u github.com/gin-gonic/gin
-go get github.com/xuri/excelize
-go get github.com/sirupsen/logrus
-
-# Linux 에서만
-go get github.com/fvbock/endless 
-```
