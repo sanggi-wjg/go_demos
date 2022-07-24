@@ -15,11 +15,6 @@ func newStack() *Stack {
 	return &Stack{}
 }
 
-func removeArrayByIndex(slice []any, index int) []any {
-	fmt.Println(slice[:index], slice[index+1:])
-	return append(slice[:index], slice[index+1:]...)
-}
-
 func (s *Stack) push(value any) {
 	s.data = append(s.data, value)
 }
