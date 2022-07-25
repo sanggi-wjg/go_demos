@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-const QUEUE_SIZE = 5
+const QUEUE_SIZE = 20
 
 var queue = newChannelQueue(QUEUE_SIZE)
 
@@ -20,17 +20,11 @@ func newChannelQueue(size int) *ChannelQueue {
 }
 
 func (q *ChannelQueue) get() any {
-	if len(q.data) > 0 {
-		return <-q.data
-	} else {
-		return nil
-	}
+	return <-q.data
 }
 
 func (q *ChannelQueue) set(value any) {
-	if len(q.data) < QUEUE_SIZE {
-		q.data <- value
-	}
+	q.data <- value
 }
 
 func setTest() {
