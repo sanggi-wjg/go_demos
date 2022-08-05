@@ -47,3 +47,8 @@ https://github.com/sirupsen/logrus
 ### Go prometheus
 https://prometheus.io/docs/guides/go-application/
 https://github.com/prometheus/client_golang
+
+
+https://dev.to/ankit01oss/7-github-projects-to-make-you-a-better-go-developer-2nmh
+
+https://github.com/inancgumus/learngo
