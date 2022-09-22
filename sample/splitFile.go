@@ -3,6 +3,7 @@ package sample
 import (
 	"fmt"
 	"math"
+	"math/rand"
 	"os"
 	"runtime"
 	"strconv"
@@ -42,8 +43,8 @@ func createUnorderedFile(number int) {
 	// go write
 	channel := make(chan bool, MAX_CONCURRENT_JOB)
 	for i := 0; i < number; i++ {
-		// go writeNumber(file, rand.Intn(100), channel)
-		go writeNumber(file, i+1, channel)
+		go writeNumber(file, rand.Intn(100), channel)
+		// go writeNumber(file, i+1, channel)
 		<-channel
 	}
 }
@@ -110,7 +111,7 @@ func SplitFileMain() {
 	runtime.GOMAXPROCS(runtime.NumCPU() / 2)
 	start := time.Now()
 	// main
-	// createUnorderedFile(NUMBER_OF_UNORDERED)
+	createUnorderedFile(NUMBER_OF_UNORDERED)
 	// splitFileToChunks()
 	fmt.Println("Total Execute Time: " + time.Now().Sub(start).String())
 }
