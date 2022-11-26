@@ -5,24 +5,24 @@ import (
 	"fmt"
 )
 
-var stackIsEmpty = errors.New("stack is empty")
+var errStackIsEmpty = errors.New("stack is empty")
 
-type Stack struct {
+type stack struct {
 	data []any
 }
 
-func newStack() *Stack {
-	return &Stack{}
+func NewStack() *stack {
+	return &stack{}
 }
 
-func (s *Stack) push(value any) {
+func (s *stack) Push(value any) {
 	s.data = append(s.data, value)
 }
 
-func (s *Stack) pop() (any, error) {
+func (s *stack) Pop() (any, error) {
 	length := len(s.data)
 	if length == 0 {
-		return nil, stackIsEmpty
+		return nil, errStackIsEmpty
 	}
 
 	value := s.data[length-1]
@@ -30,37 +30,40 @@ func (s *Stack) pop() (any, error) {
 	return value, nil
 }
 
-func (s *Stack) peek() (any, error) {
+func (s *stack) Peek() (any, error) {
 	length := len(s.data)
 	if length == 0 {
-		return nil, stackIsEmpty
+		return nil, errStackIsEmpty
 	}
 
 	return s.data[length-1], nil
 }
 
-func (s *Stack) isEmpty() bool {
-	if len(s.data) == 0 {
-		return true
+func (s *stack) IsEmpty() bool {
+	return len(s.data) == 0
+}
+
+func (s *stack) Show() {
+	for i, d := range s.data {
+		fmt.Printf("%d %v\n", i, d)
 	}
-	return false
 }
 
 func StackMain() {
-	stack := newStack()
-	stack.push(1)
-	stack.push(2)
-	stack.push(3)
+	stack := NewStack()
+	stack.Push(1)
+	stack.Push(2)
+	stack.Push(3)
 
-	v, _ := stack.pop()
+	v, _ := stack.Pop()
 	fmt.Println("pop:", v)
 	fmt.Println(stack.data...)
 
-	v, _ = stack.peek()
+	v, _ = stack.Peek()
 	fmt.Println("peek:", v)
 
-	fmt.Println("isEmpty:", stack.isEmpty())
-	stack.pop()
-	stack.pop()
-	fmt.Println("isEmpty:", stack.isEmpty())
+	fmt.Println("isEmpty:", stack.IsEmpty())
+	stack.Pop()
+	stack.Pop()
+	fmt.Println("isEmpty:", stack.IsEmpty())
 }
