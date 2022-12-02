@@ -3,9 +3,6 @@ package file
 import (
 	"fmt"
 	"os"
-	"runtime"
-	"syscall"
-	"time"
 )
 
 const FILE_PATH = "data/big_data.txt"
@@ -44,17 +41,16 @@ func (f *myFile) showStat() {
 	fmt.Printf("ModTime.Local: %v\n", stat.ModTime().Local())
 	fmt.Printf("ModTime.UTC: %v\n", stat.ModTime().UTC())
 
-	if runtime.GOOS == "windows" {
-		sys := stat.Sys().(*syscall.Win32FileAttributeData)
-		lastAccessTime := time.Since(time.Unix(0, sys.LastAccessTime.Nanoseconds()))
-		creationTime := time.Since(time.Unix(0, sys.CreationTime.Nanoseconds()))
-		lastWriteTime := time.Since(time.Unix(0, sys.LastWriteTime.Nanoseconds()))
+	// if runtime.GOOS == "windows" {
+	// 	sys := stat.Sys().(*syscall.Win32FileAttributeData)
+	// 	lastAccessTime := time.Since(time.Unix(0, sys.LastAccessTime.Nanoseconds()))
+	// 	creationTime := time.Since(time.Unix(0, sys.CreationTime.Nanoseconds()))
+	// 	lastWriteTime := time.Since(time.Unix(0, sys.LastWriteTime.Nanoseconds()))
 
-		fmt.Printf("LastAccessTime: %v\n", lastAccessTime)
-		fmt.Printf("creationTime: %v\n", creationTime)
-		fmt.Printf("lastWriteTime: %v\n", lastWriteTime)
-
-	}
+	// 	fmt.Printf("LastAccessTime: %v\n", lastAccessTime)
+	// 	fmt.Printf("creationTime: %v\n", creationTime)
+	// 	fmt.Printf("lastWriteTime: %v\n", lastWriteTime)
+	// }
 	// else {
 	// 	sys := stat.Sys()
 	// 	aTime := sys.(*syscall.Stat_t).Atim
@@ -96,3 +92,10 @@ creationTime: 52h14m28.1290086s
 lastWriteTime: 51h22m46.2213526s
 ============================
 */
+
+func IsFileExist(path string) bool {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return false
+	}
+	return true
+}
